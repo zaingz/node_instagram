@@ -3,7 +3,7 @@ var instagram_api = {
 
 
 
-	grabImages: function(tag, count) {
+	grabTagImages: function(tag, count) {
 	
     var URL = 'https://api.instagram.com/v1/tags/' + tag + 
     					'/media/recent?callback=?&count=' + count +
@@ -15,6 +15,20 @@ var instagram_api = {
   }
 });
    	return JSON.parse(res.getBody('utf8'));
+
+   
+},
+
+grabUserImages: function() {
+  
+    var URL = 'https://api.instagram.com/v1/users/222642745/media/recent/?client_id=092fd1da6072444693cfdce04caa2af9';
+
+    var res = request('GET', URL, {
+  'headers': {
+    'Content-type': 'application/json'
+  }
+});
+    return JSON.parse(res.getBody('utf8'));
 
    
 }

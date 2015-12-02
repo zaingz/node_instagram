@@ -1,10 +1,48 @@
-<h1>Example App: Home</h1>
+<h1>Images from a Tag</h1>
 
 
-{{#each data.data}}
+
+<div class="masonry">
+{{#each data1.data}}
  
- 
- 		<img src={{images.thumbnail.url}} />
+
+ 	<div class="img_box">
+ 		<a href={{link}}>
+ 			<img class="img" src={{images.low_resolution.url}} />
+ 		</a>
+ 		<p id="u_name">Username: {{user.username}}</p>
+ 		<p id="likes_comments">Like: {{likes.count}} Comments: {{comments.count}}</p>
+ 		<p id="cation"> Caption: {{caption.text}}</p>
+ 		
+ 		<button onclick="publish()" >PUBLISH</button>
+ 	</div>
  
 
 {{/each}}
+</div>
+
+<script type="text/javascript">
+function publish(arg){
+	console.log(arg);
+}
+</script>
+
+<h1>Images from User</h1>
+
+
+<div class="masonry">
+{{#each data2.data}}
+ 
+
+ 	<div class="img_box">
+ 		<a href={{link}}>
+ 			<img class="img" src={{images.low_resolution.url}} />
+ 		</a>
+ 		<p id="u_name">Username: {{user.username}}</p>
+ 		<p id="likes_comments">Like: {{likes.count}} Comments: {{comments.count}}</p>
+ 		<p id="cation"> Caption: {{caption.text}}</p>
+ 	</div>
+ 
+
+{{/each}}
+</div>
