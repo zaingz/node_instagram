@@ -14,20 +14,20 @@
 	
 	
 }
-.img_box>p{padding: 10px;}
+.img_box>p{padding-left: 10px;}
 .img{width: 100%;}
 .masonry { /* Masonry container */
 	 min-width: 700px;
   
-     -moz-column-count:3;
-    -moz-column-gap: 3%;
-    -moz-column-width: 30%;
-    -webkit-column-count:3;
-    -webkit-column-gap: 3%;
-    -webkit-column-width: 30%;
-    column-count: 3;
-    column-gap: 3%;
-    column-width: 30%;
+     -moz-column-count:5;
+    -moz-column-gap: 0%;
+    -moz-column-width: 20%;
+    -webkit-column-count:5;
+    -webkit-column-gap: 0%;
+    -webkit-column-width: 20%;
+    column-count: 5;
+    column-gap: 0%;
+    column-width: 20%;
 }
 .item { /* Masonry bricks or child elements */
  

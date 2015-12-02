@@ -6,7 +6,7 @@
 {{#each data1.data}}
  
 
- 	<div class="img_box">
+ 	<div class="img_box" id="{{@index}}">
  		<a href={{link}}>
  			<img class="img" src={{images.low_resolution.url}} />
  		</a>
@@ -14,7 +14,7 @@
  		<p id="likes_comments">Like: {{likes.count}} Comments: {{comments.count}}</p>
  		<p id="cation"> Caption: {{caption.text}}</p>
  		
- 		<button onclick="publish()" >PUBLISH</button>
+ 		<button onclick="publish({{@index}})" >PUBLISH</button>
  	</div>
  
 
@@ -22,9 +22,12 @@
 </div>
 
 <script type="text/javascript">
-function publish(arg){
-	console.log(arg);
-}
+
+	function publish(index){
+		console.log(index);
+		$('#'+index ).find('#u_name').html("MANGO");
+	}
+
 </script>
 
 <h1>Images from User</h1>
