@@ -2,7 +2,8 @@ var express    = require('express');        // call express
 var app        = express();
 var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
-var instagram_api = require("./instagram_api.js");   
+var instagram_api = require("./instagram_api.js");
+var Photo = require('./models/Photo');   
 
 app.use('/public',express.static(__dirname + '/public'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -22,10 +23,11 @@ var router = express.Router();
 router.get('/admin', function(req, res) {
 
 
-    var data1 =  instagram_api.grabTagImages('love', 10);
+    var data1 =  instagram_api.grabTagImages('love', 12);
+     var data12 =  instagram_api.grabTagImages('teen', 12);
     var data2 =  instagram_api.grabUserImages();
 
-	 res.render('admin', {data1: data1, data2: data2});
+	 res.render('admin', {data1: data1, data12: data12, data2:data2});
     
 });
 
@@ -34,12 +36,60 @@ router.post('/publish', function(req, res, next) {
 
 
     var photo_recived = req.body.photo;
-    console.log(photo_recived);
-	next();
+    
+    var photo = new Photo(photo_recived);
+
+
+    Photo.find({ post_url: photo.post_url }, function(err, user) {
+ 		 if (user.length == 0) {
+ 		 
+				photo.save(function(err) {
+  					if (err) throw err;
+
+  				 res.status(201).send({"message": "Saved photo"});
+				});
+
+ 		 	 
+ 		 }else{	
+ 		 		console.log("Duplicate Insertion");
+ 		 		res.status(403).send({"error": "Duplicate photo"});
+ 		 }
+
+  
+  		
+	});
+
+	
     
 });
 
 
+router.get('/feed', function(req, res) {
+
+
+   Photo.find({}, function(err, photos) {
+  		if (err) throw err;
+
+ 	res.render('public_feed', {data: photos});
+  	
+	}).sort({created_at : '-1'});
+	
+    
+});
+
+
+router.delete('/unpublish', function(req, res){
+
+	var to_be_deleted = req.body.photo;
+	Photo.findOneAndRemove({ post_url: to_be_deleted.post_url }, function(err) {
+ 		 if (err) throw err;
+
+   	res.status(201).send({"message": "Deleted photo"});
+  	console.log('Photo deleted!');
+});
+
+
+});
 
 
 app.use(router);

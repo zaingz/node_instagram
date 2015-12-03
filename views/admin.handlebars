@@ -1,4 +1,4 @@
-<h1>Images from a Tag</h1>
+<h1>Images from a Tag Love</h1>
 
 
 
@@ -6,28 +6,169 @@
 {{#each data1.data}}
  
 
- 	<div class="img_box" id="{{@index}}">
- 		<a href={{link}}>
- 			<img class="img" src={{images.low_resolution.url}} />
+ 	<div class="img_box" id="tag1{{@index}}">
+ 		<a id="post_url" href={{link}}>
+ 			<img id="img" class="img" src={{images.low_resolution.url}} />
  		</a>
- 		<p id="u_name">Username: {{user.username}}</p>
- 		<p id="likes_comments">Like: {{likes.count}} Comments: {{comments.count}}</p>
- 		<p id="cation"> Caption: {{caption.text}}</p>
+ 		<p id="u_name">{{user.username}}</p>
+ 		<span style="display:none" id="u_img_url">{{user.profile_picture}} </span>
+ 		<p id="likes">{{likes.count}}</p>
+ 		<p id="comments">{{comments.count}}</p>
+ 		<p id="caption">{{caption.text}}</p>
  		
- 		<button onclick="publish({{@index}})" >PUBLISH</button>
+ 		<button onclick="publish1({{@index}})" >PUBLISH</button>
  	</div>
  
 
 {{/each}}
 </div>
 
+
+
+<h1>Images from a Tag Teen</h1>
+
+
+
+<div class="masonry">
+{{#each data12.data}}
+ 
+
+ 	<div class="img_box" id="tag1{{@index}}">
+ 		<a id="post_url" href={{link}}>
+ 			<img id="img" class="img" src={{images.low_resolution.url}} />
+ 		</a>
+ 		<p id="u_name">{{user.username}}</p>
+ 		<span style="display:none" id="u_img_url">{{user.profile_picture}} </span>
+ 		<p id="likes">{{likes.count}}</p>
+ 		<p id="comments">{{comments.count}}</p>
+ 		<p id="caption">{{caption.text}}</p>
+ 		
+ 		<button onclick="publish2({{@index}})" >PUBLISH</button>
+ 	</div>
+ 
+
+{{/each}}
+</div>
+
+
+
+
+<!--   post_url: { type: String, required: true, unique: true },
+  user: { name: String, image_url: String },
+  image_url: {low:String,medium:String,high:String},
+  caption: String,
+  likes: Number,
+  comments: Number,
+  
+ 
+  created_at: Date -->
+
 <script type="text/javascript">
 
-	function publish(index){
-		console.log(index);
-		$('#'+index ).find('#u_name').html("MANGO");
-	}
+	function publish1(index){
+		
+		var image_box = $('#tag1'+index);
 
+		var image = {
+			post_url: image_box.find('#post_url').attr('href'),
+			user: {name: image_box.find('#u_name').html(), image_url: image_box.find('#u_img_url').html()},
+			image_url: image_box.find('#img').attr('src'),
+			caption: image_box.find('#caption').html() ,
+			likes : parseInt( image_box.find('#likes').html(), 10 ),
+			comments: parseInt( image_box.find('#comments').html(), 10 ),
+			created_at: new Date()
+		};
+
+
+
+		
+		console.log(JSON.stringify(image));
+
+		/* $.post("/publish", {photo: image} ,function(data, status, xhr){
+        	console.log("Data: " + JSON.stringify(data) + "\nStatus: " + xhr.status);
+		});
+*/
+
+
+		  $.ajax({
+            url: '/publish',
+
+            type: "POST",
+
+
+            data: {photo:image},
+
+            /**
+             * A function to be called if the request fails. 
+             */
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log("error: "+ jqXHR.status);
+            },
+
+            /**
+             * A function to be called if the request succeeds.
+             */
+            success: function(data, textStatus, jqXHR) {
+                
+                console.log(data);
+                image_box.remove();
+            }
+        });
+
+
+	}
+	function publish2(index){
+		
+		var image_box = $('#tag1'+index);
+
+		var image = {
+			post_url: image_box.find('#post_url').attr('href'),
+			user: {name: image_box.find('#u_name').html(), image_url: image_box.find('#u_img_url').html()},
+			image_url: image_box.find('#img').attr('src'),
+			caption: image_box.find('#caption').html() ,
+			likes : parseInt( image_box.find('#likes').html(), 10 ),
+			comments: parseInt( image_box.find('#comments').html(), 10 ),
+			created_at: new Date()
+		};
+
+
+
+		
+		console.log(JSON.stringify(image));
+
+		/* $.post("/publish", {photo: image} ,function(data, status, xhr){
+        	console.log("Data: " + JSON.stringify(data) + "\nStatus: " + xhr.status);
+		});
+*/
+
+
+		  $.ajax({
+            url: '/publish',
+
+            type: "POST",
+
+
+            data: {photo:image},
+
+            /**
+             * A function to be called if the request fails. 
+             */
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log("error: "+ jqXHR.status);
+            },
+
+            /**
+             * A function to be called if the request succeeds.
+             */
+            success: function(data, textStatus, jqXHR) {
+                
+                console.log(data);
+                image_box.remove();
+            }
+        });
+
+
+	}
 </script>
 
 <h1>Images from User</h1>

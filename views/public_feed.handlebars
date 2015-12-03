@@ -1,0 +1,62 @@
+<h1>Here are the photos</h1>
+<div class="masonry">
+{{#each data}}
+ 
+
+
+ 	
+ 	<div class="img_box" id="tag1{{@index}}">
+ 		<a id="post_url" href={{post_url}}>
+ 			<img id="img" class="img" src={{image_url}} />
+ 		</a>
+ 		<button onclick="publish1({{@index}})" >DELETE</button>
+ 	</div>
+ 
+ 		
+
+{{/each}}
+
+</div>
+
+<script type="text/javascript">
+
+	function publish1(index){
+		
+		var image_box = $('#tag1'+index);
+
+		var image = {
+			post_url: image_box.find('#post_url').attr('href')
+			
+		};
+
+
+
+
+		  $.ajax({
+            url: '/unpublish',
+
+            type: "DELETE",
+
+
+            data: {photo:image},
+
+            /**
+             * A function to be called if the request fails. 
+             */
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log("error: "+ jqXHR.status);
+            },
+
+            /**
+             * A function to be called if the request succeeds.
+             */
+            success: function(data, textStatus, jqXHR) {
+                image_box.remove();
+               
+            }
+        });
+
+
+	}
+
+</script>
