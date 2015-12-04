@@ -80,14 +80,17 @@ router.post('/publish', function(req, res, next) {
 });
 
 
-router.get('/feed', function(req, res) {
+router.get('/astaric_feed', function(req, res) {
 
 
    Photo.find({}, function(err, photos) {
   		if (err) throw err;
 
-  	var data2 =  instagram_api.grabUserImages();	
- 	res.render('public_feed', {data: photos, data2:data2});
+  	var data2 =  instagram_api.grabUserImages();
+
+
+  
+ 	res.render('public_feed', {data: photos.slice(0,6), data2:data2, data3:photos.slice(6,12)});
   	
 	}).sort({created_at : '-1'}).limit(12);
 	

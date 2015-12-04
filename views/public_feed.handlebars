@@ -203,6 +203,45 @@
 
 {{/each}}
 
+{{#each data3}}
+
+
+
+
+
+    <div class="imgcontainer">
+    <div>
+    <img src="{{image_url}}" width="100%" height="100%"/>
+    </div>
+
+    <div class="leftdata">
+    <div class="userimg">
+    <img class="roundimg" src="{{user.image_url}}" width="25px" height="25px"/> 
+    </div>
+
+    <div class="username">
+    <a href="{{post_url}}">{{user.name}}</a>
+    </div>
+
+    
+    </div>
+
+
+    <div class="rightdata">
+    <a href="#" class="fa fa-heart">{{likes}}</a>
+    <a href="#" class="fa fa-comment-o">{{comments}}</a>
+    </div>
+    
+    </div>
+
+
+
+
+{{/each}}
+
+
+
+
 
 </div>
 
