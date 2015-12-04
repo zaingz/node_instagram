@@ -70,9 +70,10 @@ router.get('/feed', function(req, res) {
    Photo.find({}, function(err, photos) {
   		if (err) throw err;
 
- 	res.render('public_feed', {data: photos});
+  	var data2 =  instagram_api.grabUserImages();	
+ 	res.render('public_feed', {data: photos, data2:data2});
   	
-	}).sort({created_at : '-1'});
+	}).sort({created_at : '-1'}).limit(12);
 	
     
 });

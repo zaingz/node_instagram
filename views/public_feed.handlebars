@@ -20,7 +20,7 @@
 
 .flip-container, .front, .back {
     width: 205px;
-    height: 210px;
+    height: 205px;
 }
 
 .flipper {
@@ -145,6 +145,29 @@
 
 
 {{/each}}
+
+
+
+{{#each data2.data}}
+
+
+
+<div style="float:left" class="flip-container" ontouchstart="this.classList.toggle('hover');">
+  <div class="flipper">
+    <div class="front">
+      <img style="width:100%" src="{{images.low_resolution.url}}">
+    </div>
+    <div class="back">
+      <div class="back-logo"> <img width="50" src="{{user.profile_picture}}"> </div>
+      <div class="back-title">{{user.username}}</div>
+      <p>Likes {{likes.count}}, Comments {{comments.count}}</p>
+    </div>
+  </div>
+</div>
+
+
+{{/each}}
+
 
 </div>
 

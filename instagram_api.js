@@ -21,7 +21,7 @@ var instagram_api = {
 
 grabUserImages: function() {
   
-    var URL = 'https://api.instagram.com/v1/users/222642745/media/recent/?client_id=092fd1da6072444693cfdce04caa2af9';
+    var URL = 'https://api.instagram.com/v1/users/222642745/media/recent/?count=6&client_id=092fd1da6072444693cfdce04caa2af9';
 
     var res = request('GET', URL, {
   'headers': {
