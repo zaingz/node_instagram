@@ -1,5 +1,7 @@
 var express    = require('express');        // call express
 var app        = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 var instagram_api = require("./instagram_api.js");
@@ -18,7 +20,10 @@ var port = process.env.PORT || 8080;        // set our port
 
 var router = express.Router();             
 
- 
+ io.on('connection', function(socket){
+  console.log('a user connected');
+});
+
 
 router.get('/admin', function(req, res) {
 
@@ -102,6 +107,10 @@ router.delete('/unpublish', function(req, res){
 
 
 });
+
+router.get("/", function(req, res){
+	 res.render("index");
+})
 
 
 app.use(router);
