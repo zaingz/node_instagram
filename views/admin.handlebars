@@ -1,4 +1,4 @@
-<h1>Images from a Tag Love</h1>
+<h1>Images from a Tag العون_المباشر</h1>
 
 
 
@@ -14,7 +14,7 @@
  		<span style="display:none" id="u_img_url">{{user.profile_picture}} </span>
  		<p id="likes">{{likes.count}}</p>
  		<p id="comments">{{comments.count}}</p>
- 		<p id="caption">{{caption.text}}</p>
+ 		<p style="display: none;" id="caption">{{caption.text}}</p>
  		
  		<button onclick="publish1({{@index}})" >PUBLISH</button>
  	</div>
@@ -25,7 +25,7 @@
 
 
 
-<h1>Images from a Tag Teen</h1>
+<h1>Images from a Tag هاشتاق_الكويت</h1>
 
 
 
@@ -41,7 +41,7 @@
  		<span style="display:none" id="u_img_url">{{user.profile_picture}} </span>
  		<p id="likes">{{likes.count}}</p>
  		<p id="comments">{{comments.count}}</p>
- 		<p id="caption">{{caption.text}}</p>
+ 		<p  style="display: none;" id="caption">{{caption.text}}</p>
  		
  		<button onclick="publish2({{@index}})" >PUBLISH</button>
  	</div>
@@ -50,6 +50,61 @@
 {{/each}}
 </div>
 
+
+
+
+
+
+<h1>Images from a Tag Direct Aid</h1>
+
+
+
+<div class="masonry">
+{{#each data13.data}}
+ 
+
+    <div class="img_box" id="tag3{{@index}}">
+        <a id="post_url" href={{link}}>
+            <img id="img" class="img" src={{images.low_resolution.url}} />
+        </a>
+        <p id="u_name">{{user.username}}</p>
+        <span style="display:none" id="u_img_url">{{user.profile_picture}} </span>
+        <p id="likes">{{likes.count}}</p>
+        <p id="comments">{{comments.count}}</p>
+        <p  style="display: none;" id="caption">{{caption.text}}</p>
+        
+        <button onclick="publish3({{@index}})" >PUBLISH</button>
+    </div>
+ 
+
+{{/each}}
+</div>
+
+
+<h1>Images from a Tag HashTagKuwait</h1>
+
+
+
+<div class="masonry">
+{{#each data14.data}}
+ 
+
+    <div class="img_box" id="tag4{{@index}}">
+        <a id="post_url" href={{link}}>
+            <img id="img" class="img" src={{images.low_resolution.url}} />
+        </a>
+        <p id="u_name">{{user.username}}</p>
+        <span style="display:none" id="u_img_url">{{user.profile_picture}} </span>
+        <p id="likes">{{likes.count}}</p>
+        <p id="comments">{{comments.count}}</p>
+        <p  style="display: none;" id="caption">{{caption.text}}</p>
+        
+        <button onclick="publish4({{@index}})" >PUBLISH</button>
+    </div>
+ 
+
+{{/each}}
+</div>
 
 
 
@@ -169,6 +224,115 @@
 
 
 	}
+
+
+    //start of 3 and 4
+
+        function publish3(index){
+        
+        var image_box = $('#tag3'+index);
+
+        var image = {
+            post_url: image_box.find('#post_url').attr('href'),
+            user: {name: image_box.find('#u_name').html(), image_url: image_box.find('#u_img_url').html()},
+            image_url: image_box.find('#img').attr('src'),
+            caption: image_box.find('#caption').html() ,
+            likes : parseInt( image_box.find('#likes').html(), 10 ),
+            comments: parseInt( image_box.find('#comments').html(), 10 ),
+            created_at: new Date()
+        };
+
+
+
+        
+        console.log(JSON.stringify(image));
+
+        /* $.post("/publish", {photo: image} ,function(data, status, xhr){
+            console.log("Data: " + JSON.stringify(data) + "\nStatus: " + xhr.status);
+        });
+*/
+
+
+          $.ajax({
+            url: '/publish',
+
+            type: "POST",
+
+
+            data: {photo:image},
+
+            /**
+             * A function to be called if the request fails. 
+             */
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log("error: "+ jqXHR.status);
+            },
+
+            /**
+             * A function to be called if the request succeeds.
+             */
+            success: function(data, textStatus, jqXHR) {
+                
+                console.log(data);
+                image_box.remove();
+            }
+        });
+
+
+    }
+    function publish4(index){
+        
+        var image_box = $('#tag4'+index);
+
+        var image = {
+            post_url: image_box.find('#post_url').attr('href'),
+            user: {name: image_box.find('#u_name').html(), image_url: image_box.find('#u_img_url').html()},
+            image_url: image_box.find('#img').attr('src'),
+            caption: image_box.find('#caption').html() ,
+            likes : parseInt( image_box.find('#likes').html(), 10 ),
+            comments: parseInt( image_box.find('#comments').html(), 10 ),
+            created_at: new Date()
+        };
+
+
+
+        
+        console.log(JSON.stringify(image));
+
+        /* $.post("/publish", {photo: image} ,function(data, status, xhr){
+            console.log("Data: " + JSON.stringify(data) + "\nStatus: " + xhr.status);
+        });
+*/
+
+
+          $.ajax({
+            url: '/publish',
+
+            type: "POST",
+
+
+            data: {photo:image},
+
+            /**
+             * A function to be called if the request fails. 
+             */
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log("error: "+ jqXHR.status);
+            },
+
+            /**
+             * A function to be called if the request succeeds.
+             */
+            success: function(data, textStatus, jqXHR) {
+                
+                console.log(data);
+                image_box.remove();
+            }
+        });
+
+
+    }
+
 </script>
 
 <h1>Published Images</h1>

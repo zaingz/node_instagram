@@ -23,8 +23,10 @@ var router = express.Router();
 router.get('/admin', function(req, res) {
 
 
-    var data1 =  instagram_api.grabTagImages('love', 12);
-     var data12 =  instagram_api.grabTagImages('teen', 12);
+    var data1 =  instagram_api.grabTag1Images(12);
+     var data12 =  instagram_api.grabTag2Images( 12);
+      var data13 =  instagram_api.grabTag2Images("directaid", 12);
+      var data14 =  instagram_api.grabTag2Images("hashtagkuwait", 12);
     var data2 =  instagram_api.grabUserImages();
 
     var db_images;
@@ -32,7 +34,7 @@ router.get('/admin', function(req, res) {
   		if (err) throw err;
 
   	db_images = photos
- 	 res.render('admin', {data1: data1, data12: data12, data2:data2, db_images:db_images});
+ 	 res.render('admin', {data1: data1, data12: data12,data13: data13, data14: data14, data2:data2, db_images:db_images});
   	
 	}).sort({created_at : '-1'}).limit(12);
 

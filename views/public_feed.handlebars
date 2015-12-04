@@ -169,27 +169,34 @@
 
 
 
-<div class="imgcontainer">
-<div>
-<img src="{{images.low_resolution.url}}" width="100%" height="100%"/>
-</div>
 
-<div class="leftdata">
-<div class="userimg">
-<img class="roundimg" src="{{user.profile_picture}}" width="25px" height="25px"/> 
-</div>
+    <div class="imgcontainer">
+    <div>
+    <img src="{{images.low_resolution.url}}" width="100%" height="100%"/>
+    </div>
 
-<div class="username">
-<a href="#">{{user.username}}</a>
-</div>
+    <div class="leftdata">
+    <div class="userimg">
+    <img class="roundimg" src="{{user.profile_picture}}" width="25px" height="25px"/> 
+    </div>
 
-<div class="rightdata">
-<a href="#" class="fa fa-heart">{{likes.count}}</a>
-<a href="#" class="fa fa-comment-o">{{comments.count}}</a>
-</div>
-</div>
+    <div class="username">
+    <a href="{{post_url}}">{{user.username}}</a>
+    </div>
 
-</div>
+    
+    </div>
+
+
+    <div class="rightdata">
+    <a href="#" class="fa fa-heart">{{likes.count}}</a>
+    <a href="#" class="fa fa-comment-o">{{comments.count}}</a>
+    </div>
+    
+    </div>
+
+
+
 
 
 
