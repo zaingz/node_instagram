@@ -27,7 +27,16 @@ router.get('/admin', function(req, res) {
      var data12 =  instagram_api.grabTagImages('teen', 12);
     var data2 =  instagram_api.grabUserImages();
 
-	 res.render('admin', {data1: data1, data12: data12, data2:data2});
+    var db_images;
+     Photo.find({}, function(err, photos) {
+  		if (err) throw err;
+
+  	db_images = photos
+ 	 res.render('admin', {data1: data1, data12: data12, data2:data2, db_images:db_images});
+  	
+	}).sort({created_at : '-1'}).limit(12);
+
+	
     
 });
 

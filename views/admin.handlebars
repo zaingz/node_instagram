@@ -171,22 +171,66 @@
 	}
 </script>
 
-<h1>Images from User</h1>
+<h1>Published Images</h1>
 
 
 <div class="masonry">
-{{#each data2.data}}
+{{#each db_images}}
  
 
- 	<div class="img_box">
- 		<a href={{link}}>
- 			<img class="img" src={{images.low_resolution.url}} />
+ 	<div class="img_box" id=tag1{{@index}}>
+ 		<a href={{post_url}}>
+ 			<img class="img" src={{image_url}} />
  		</a>
- 		<p id="u_name">Username: {{user.username}}</p>
- 		<p id="likes_comments">Like: {{likes.count}} Comments: {{comments.count}}</p>
- 		<p id="cation"> Caption: {{caption.text}}</p>
+ 		<button onclick="unpublish1({{@index}})">Delete</button>
  	</div>
  
 
 {{/each}}
 </div>
+
+
+
+
+<script type="text/javascript">
+
+    function unpublish1(index){
+        
+        var image_box = $('#tag1'+index);
+
+        var image = {
+            post_url: image_box.find('a').attr('href')
+            
+        };
+
+
+
+
+          $.ajax({
+            url: '/unpublish',
+
+            type: "DELETE",
+
+
+            data: {photo:image},
+
+            /**
+             * A function to be called if the request fails. 
+             */
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log("error: "+ jqXHR.status);
+            },
+
+            /**
+             * A function to be called if the request succeeds.
+             */
+            success: function(data, textStatus, jqXHR) {
+                image_box.remove();
+               
+            }
+        });
+
+
+    }
+
+</script>

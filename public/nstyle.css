@@ -1,0 +1,52 @@
+body{margin: 0; padding: 0;}
+
+.ncontainer{
+	width:100%;
+	text-align:center;padding: 0;
+}
+
+
+.imgcontainer{
+	background-color: #f3f3f3;
+	width:15.3%;
+	padding:5px 5px 5px 5px;
+	border: 1px solid #939393;
+	float: left;
+	margin:.2%;
+}
+.userimg{
+	float:left;
+}
+
+.roundimg{
+	border-radius: 50%;
+}
+
+.username{
+	font-family: arial;
+	font-size: 13px;
+	font-weight: 500;
+	float: left;
+	margin-left: 8px;
+}
+
+.leftdata{
+	margin-top: 10px;
+	width:100%;
+	display: flex;
+}
+.username{
+	margin-top: 4px;
+}
+
+.rightdata{
+	text-align: center;
+	font-size: 12px;
+	width: 100%;
+	margin-top: 2px;
+}
+
+a{
+	text-decoration: none;
+	color:#60605f !important;
+}
