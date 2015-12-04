@@ -5,8 +5,7 @@ var instagram_api = {
 
 	grabTag1Images: function(count) {
 	
-    var URL = 'https://api.instagram.com/v1/tags/العون_المباشر/media/recent?callback=?&count=' + count +
-    					 '&access_token=16384709.6ac06b4.49b97800d7fd4ac799a2c889f50f2587';
+    var URL = 'https://api.instagram.com/v1/tags/%D8%A7%D9%84%D8%B9%D9%88%D9%86_%D8%A7%D9%84%D9%85%D8%A8%D8%A7%D8%B4%D8%B1/media/recent?callback=?&count=10&access_token=16384709.6ac06b4.49b97800d7fd4ac799a2c889f50f2587';
 
    	var res = request('GET', URL, {
   'headers': {
@@ -20,8 +19,7 @@ var instagram_api = {
 
   grabTag2Images: function(count) {
   
-    var URL = 'https://api.instagram.com/v1/tags/هاشتاق_الكويت/media/recent?callback=?&count=' + count +
-               '&access_token=16384709.6ac06b4.49b97800d7fd4ac799a2c889f50f2587';
+    var URL = 'https://api.instagram.com/v1/tags/%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA/media/recent?callback=?&count=10&access_token=16384709.6ac06b4.49b97800d7fd4ac799a2c889f50f2587';
 
     var res = request('GET', URL, {
   'headers': {
