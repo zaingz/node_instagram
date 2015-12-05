@@ -1,7 +1,9 @@
 var express    = require('express');        // call express
 var app        = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server, {
+    'log level': 2
+});
 var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 var instagram_api = require("./instagram_api.js");
@@ -22,6 +24,16 @@ var router = express.Router();
 
  io.on('connection', function(socket){
   console.log('a user connected');
+   socket.on('publish', function(msg){
+    console.log('message: ' + msg);
+     io.emit('feedRefresh', msg);
+     
+  });
+    socket.on('unPublish', function(msg){
+    console.log('message: ' + msg);
+     io.emit('feedRefresh', msg);
+     
+  });
 });
 
 
@@ -123,5 +135,5 @@ app.use(router);
 
 
 
-app.listen(port);
+server.listen(port);
 console.log('Magic happens on port ' + port);

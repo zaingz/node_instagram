@@ -287,4 +287,15 @@
 
 	}
 
+
+
+        $(document).ready(function(){
+              var socket = io();
+          socket.on('feedRefresh', function(msg){
+             location.reload();
+          
+            });
+            });
+    
+
 </script>

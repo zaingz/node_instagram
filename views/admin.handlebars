@@ -33,7 +33,7 @@
 {{#each data12.data}}
  
 
- 	<div class="img_box" id="tag1{{@index}}">
+ 	<div class="img_box" id="tag2{{@index}}">
  		<a id="post_url" href={{link}}>
  			<img id="img" class="img" src={{images.low_resolution.url}} />
  		</a>
@@ -167,6 +167,7 @@
                 
                 console.log(data);
                 image_box.remove();
+                pushPublish();
             }
         });
 
@@ -174,7 +175,7 @@
 	}
 	function publish2(index){
 		
-		var image_box = $('#tag1'+index);
+		var image_box = $('#tag2'+index);
 
 		var image = {
 			post_url: image_box.find('#post_url').attr('href'),
@@ -219,6 +220,7 @@
                 
                 console.log(data);
                 image_box.remove();
+                 pushPublish();
             }
         });
 
@@ -275,6 +277,7 @@
                 
                 console.log(data);
                 image_box.remove();
+                 pushPublish();
             }
         });
 
@@ -327,13 +330,28 @@
                 
                 console.log(data);
                 image_box.remove();
+                 pushPublish();
             }
         });
 
 
     }
 
+
+
+ function pushPublish(){
+     var socket = io();
+  
+    socket.emit('publish', "Hello from client");
+  
+
+}
+
+
 </script>
+
+
+
 
 <h1>Published Images</h1>
 
@@ -342,7 +360,7 @@
 {{#each db_images}}
  
 
- 	<div class="img_box" id=tag1{{@index}}>
+ 	<div class="img_box" id=del{{@index}}>
  		<a href={{post_url}}>
  			<img class="img" src={{image_url}} />
  		</a>
@@ -360,7 +378,7 @@
 
     function unpublish1(index){
         
-        var image_box = $('#tag1'+index);
+        var image_box = $('#del'+index);
 
         var image = {
             post_url: image_box.find('a').attr('href')
@@ -390,11 +408,21 @@
              */
             success: function(data, textStatus, jqXHR) {
                 image_box.remove();
+                pushDelet();
                
             }
         });
 
 
     }
+
+
+ function pushDelet(){
+     var socket = io();
+  
+    socket.emit('unPublish', "Hello from client");
+  
+
+}
 
 </script>
